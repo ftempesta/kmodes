@@ -44,7 +44,16 @@ def euclidean_dissim(a, b, **_):
         raise ValueError("Missing values detected in numerical columns.")
     return np.sum((a - b) ** 2, axis=1)
 
-
+def mahalanobis(a=None, X=None, cov=None):
+    a_minus_mean = a - np.mean(X)
+    if not cov:
+        cov = np.cov(X.values.T)
+    inv_cov = sp.linalg.inv(cov)
+    left_term = np.dot(a_minus_mean, inv_cov)
+    mahala = np.dot(left_term, a_minus_mean.T)
+    return mahala.diagonal()
+    
+    
 def ng_dissim(a, b, X=None, membship=None):
     """Ng et al.'s dissimilarity measure, as presented in
     Michael K. Ng, Mark Junjie Li, Joshua Zhexue Huang, and Zengyou He, "On the
