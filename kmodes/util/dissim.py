@@ -72,6 +72,12 @@ def mahalanobis_dissim(x, y, cov=None):
     D_square = np.dot(left_term, x_minus_mn_with_transpose)
     return D_square
 
+from scipy.spatial import distance
+
+def maha(a,b, df):
+    VI = df.cov()
+    return distance.mahalanobis(a,b,VI)
+
 ###
     
     
