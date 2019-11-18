@@ -52,6 +52,27 @@ def mahalanobis(a=None, X=None, cov=None):
     left_term = np.dot(a_minus_mean, inv_cov)
     mahala = np.dot(left_term, a_minus_mean.T)
     return mahala.diagonal()
+
+#####
+def covar(x, y):
+    x_mean = np.mean(x)
+    y_mean = np.mean(y)
+    Cov_numerator = sum(((a - x_mean)*(b - y_mean)) for a, b in zip(x, y))
+    Cov_denomerator = len(x) - 1
+    Covariance = (Cov_numerator / Cov_denomerator)
+    return  Covariance
+
+def mahalanobis_dissim(x, y, cov=None):
+    x_mean = np.mean(x)
+    x_minus_mn_with_transpose =np.transpose(x- x_mean)
+    Covariance = covar(x, np.transpose(y))
+    inv_covmat = np.linalg.inv(Covariance)
+    x_minus_mn = x - x_mean
+    left_term = (x_minus_mn, inv_covmat)
+    D_square = np.dot(left_term, x_minus_mn_with_transpose)
+    return D_square
+
+###
     
     
 def ng_dissim(a, b, X=None, membship=None):
