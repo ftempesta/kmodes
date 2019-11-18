@@ -420,7 +420,7 @@ class KPrototypes(kmodes.KModes):
 
     """
 
-    def __init__(self, n_clusters=8, max_iter=100, num_dissim=chebyshev_dissim,
+    def __init__(self, n_clusters=8, max_iter=100, num_dissim=euclidean_dissim,
                  cat_dissim=matching_dissim, init='Huang', n_init=10, gamma=None,
                  verbose=0, random_state=None, n_jobs=1):
 
