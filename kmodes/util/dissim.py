@@ -44,6 +44,11 @@ def euclidean_dissim(a, b, **_):
         raise ValueError("Missing values detected in numerical columns.")
     return np.sum((a - b) ** 2, axis=1)
 
+def chebyshev_dissim(a,b, **_):
+    if np.isnan(a).any() or np.isnan(b).any():
+        raise ValueError("Missing values detected in numerical columns.")
+    return np.sum(max(a - b), axis=1)
+
 def mahalanobis(a=None, X=None, cov=None):
     a_minus_mean = a - np.mean(X)
     if not cov:
