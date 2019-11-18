@@ -15,7 +15,7 @@ from sklearn.utils.validation import check_array
 from . import kmodes
 from .util import get_max_value_key, encode_features, get_unique_rows, \
     decode_centroids, pandas_to_numpy
-from .util.dissim import matching_dissim, euclidean_dissim, mahalanobis
+from .util.dissim import matching_dissim, euclidean_dissim, mahalanobis, chebyshev_dissim
 
 # Number of tries we give the initialization methods to find non-empty
 # clusters before we switch to random initialization.
@@ -420,7 +420,7 @@ class KPrototypes(kmodes.KModes):
 
     """
 
-    def __init__(self, n_clusters=8, max_iter=100, num_dissim=euclidean_dissim,
+    def __init__(self, n_clusters=8, max_iter=100, num_dissim=chebyshev_dissim,
                  cat_dissim=matching_dissim, init='Huang', n_init=10, gamma=None,
                  verbose=0, random_state=None, n_jobs=1):
 
